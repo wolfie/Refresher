@@ -14,14 +14,14 @@
   	<init-param>
   		<description>
   		Vaadin application class to start</description>
-  		<param-name>application</param-name>
-  		<param-value>com.github.wolfie.refresher.RefresherApplication</param-value>
+  		<param-name>root</param-name>
+  		<param-value>com.github.wolfie.refresher.RefresherRoot</param-value>
   	</init-param>
   	<init-param>
   		<description>
   		Application widgetset</description>
   		<param-name>widgetset</param-name>
-  		<param-value>com.github.wolfie.refresher.RefresherApplicationWidgetset</param-value>
+  		<param-value>com.github.wolfie.refresher.RefresherWidgetset</param-value>
   	</init-param>
   </servlet>
   <servlet-mapping>

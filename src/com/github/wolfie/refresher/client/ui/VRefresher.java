@@ -50,6 +50,7 @@ public class VRefresher extends Widget {
 		super.onAttach();
 		if (pollerSuspendedDueDetach) {
 			poller.scheduleRepeating(pollingInterval);
+			pollerSuspendedDueDetach = false;
 		}
 	}
 	
@@ -82,5 +83,13 @@ public class VRefresher extends Widget {
 	
 	public void addListener(final ClientRefreshListener clientRefreshListener) {
 		listeners.add(clientRefreshListener);
+	}
+	
+	public void setPollingEnabled(final boolean enabled) {
+		if (enabled) {
+			setPollingInterval(pollingInterval);
+		} else {
+			poller.cancel();
+		}
 	}
 }

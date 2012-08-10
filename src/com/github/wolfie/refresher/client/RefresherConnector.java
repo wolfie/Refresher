@@ -2,7 +2,6 @@ package com.github.wolfie.refresher.client;
 
 import com.github.wolfie.refresher.Refresher;
 import com.github.wolfie.refresher.client.ui.VRefresher;
-import com.github.wolfie.refresher.client.ui.VRefresher.ClientRefreshListener;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.terminal.gwt.client.communication.RpcProxy;
@@ -24,6 +23,7 @@ public class RefresherConnector extends AbstractComponentConnector {
 	@Override
 	public void onStateChanged(final StateChangeEvent stateChangeEvent) {
 		getWidget().setPollingInterval(getState().getPollingInterval());
+		getWidget().setPollingEnabled(getState().isEnabled());
 	}
 	
 	@Override
@@ -39,8 +39,7 @@ public class RefresherConnector extends AbstractComponentConnector {
 	@Override
 	protected Widget createWidget() {
 		final VRefresher widget = GWT.create(VRefresher.class);
-		widget.addListener(new ClientRefreshListener() {
-			@Override
+		widget.addListener(new VRefresher.ClientRefreshListener() {
 			public void refreshed() {
 				rpc.refresh();
 			}

@@ -30,7 +30,6 @@ public class Refresher extends AbstractComponent {
 	private final RefresherServerRpc rpc = new RefresherServerRpc() {
 		private static final long serialVersionUID = -5572645605753743517L;
 		
-		@Override
 		public void refresh() {
 			fireRefreshEvents();
 		}

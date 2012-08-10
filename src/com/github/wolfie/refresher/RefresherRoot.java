@@ -10,7 +10,6 @@ public class RefresherRoot extends Root {
 	public class DatabaseListener implements RefreshListener {
 		private static final long serialVersionUID = -8765221895426102605L;
 		
-		@Override
 		public void refresh(final Refresher source) {
 			if (databaseResult != null) {
 				// stop polling

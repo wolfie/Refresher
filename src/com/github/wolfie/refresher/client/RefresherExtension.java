@@ -19,48 +19,31 @@ package com.github.wolfie.refresher.client;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.gwt.dom.client.Document;
 import com.google.gwt.user.client.Timer;
-import com.google.gwt.user.client.ui.Widget;
 
-public class VRefresher extends Widget {
-
+public class RefresherExtension {
+	
 	public interface ClientRefreshListener {
 		void refreshed();
 	}
-
+	
 	private static final int STOP_THRESHOLD = 0;
-
+	
 	private final Poller poller;
 	private boolean pollerSuspendedDueDetach;
-
+	
 	private int pollingInterval;
-
+	
 	private final List<ClientRefreshListener> listeners = new ArrayList<ClientRefreshListener>();
-
-	public VRefresher() {
-		setElement(Document.get().createDivElement());
+	
+	public RefresherExtension() {
 		poller = new Poller();
 	}
-
-	@Override
-	protected void onAttach() {
-		super.onAttach();
-		if (pollerSuspendedDueDetach) {
-			poller.scheduleRepeating(pollingInterval);
-			pollerSuspendedDueDetach = false;
-		}
+	
+	public void unregister() {
+		poller.cancel();
 	}
-
-	@Override
-	protected void onDetach() {
-		super.onDetach();
-		if (pollingInterval > STOP_THRESHOLD) {
-			poller.cancel();
-			pollerSuspendedDueDetach = true;
-		}
-	}
-
+	
 	class Poller extends Timer {
 		@Override
 		public void run() {
@@ -69,20 +52,20 @@ public class VRefresher extends Widget {
 			}
 		}
 	}
-
+	
 	public void setPollingInterval(final int pollingInterval) {
 		this.pollingInterval = pollingInterval;
 		poller.cancel();
-
+		
 		if (pollingInterval > STOP_THRESHOLD) {
 			poller.scheduleRepeating(this.pollingInterval);
 		}
 	}
-
+	
 	public void addListener(final ClientRefreshListener clientRefreshListener) {
 		listeners.add(clientRefreshListener);
 	}
-
+	
 	public void setPollingEnabled(final boolean enabled) {
 		if (enabled) {
 			setPollingInterval(pollingInterval);

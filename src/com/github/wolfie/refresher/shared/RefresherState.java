@@ -1,11 +1,9 @@
 package com.github.wolfie.refresher.shared;
 
-import com.vaadin.shared.ComponentState;
-import com.vaadin.shared.annotations.DelegateToWidget;
+import com.vaadin.shared.communication.SharedState;
 
-public class RefresherState extends ComponentState {
+public class RefresherState extends SharedState {
 	private static final long serialVersionUID = 1642430935071877079L;
-
-	@DelegateToWidget
+	
 	public int pollingInterval = -1;
 }

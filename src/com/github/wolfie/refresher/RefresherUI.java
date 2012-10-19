@@ -8,28 +8,28 @@ import com.vaadin.ui.UI;
 
 @Widgetset("com.github.wolfie.refresher.RefresherWidgetset")
 public class RefresherUI extends UI {
-
+	
 	public class DatabaseListener implements RefreshListener {
 		private static final long serialVersionUID = -8765221895426102605L;
-
+		
 		@Override
 		public void refresh(final Refresher source) {
 			if (databaseResult != null) {
 				// stop polling
-				source.setEnabled(false);
-
+				removeExtension(source);
+				
 				// replace the "loading" with the actual fetched result
 				content.setValue("Database result was: " + databaseResult);
 			}
 		}
 	}
-
+	
 	public class DatabaseQueryProcess extends Thread {
 		@Override
 		public void run() {
 			databaseResult = veryHugeDatabaseCalculation();
 		}
-
+		
 		private String veryHugeDatabaseCalculation() {
 			// faux long lasting database query
 			try {
@@ -40,23 +40,23 @@ public class RefresherUI extends UI {
 			return "huge!";
 		}
 	}
-
+	
 	private static final long serialVersionUID = -1744455941100836080L;
-
+	
 	private String databaseResult = null;
 	private Label content;
-
+	
 	@Override
 	public void init(final VaadinRequest request) {
 		// present with a loading contents.
 		content = new Label("please wait while the database is queried");
 		addComponent(content);
-
+		
 		// the Refresher polls automatically
 		final Refresher refresher = new Refresher();
 		refresher.addListener(new DatabaseListener());
-		addComponent(refresher);
-
+		addExtension(refresher);
+		
 		new DatabaseQueryProcess().start();
 	}
 }

@@ -1,10 +1,12 @@
 package com.github.wolfie.refresher;
 
 import com.github.wolfie.refresher.Refresher.RefreshListener;
+import com.vaadin.annotations.Widgetset;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.UI;
 
+@Widgetset("com.github.wolfie.refresher.RefresherWidgetset")
 public class RefresherUI extends UI {
 
 	public class DatabaseListener implements RefreshListener {

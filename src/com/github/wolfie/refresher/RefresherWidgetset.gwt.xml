@@ -1,7 +1,6 @@
+<!DOCTYPE module SYSTEM "http://google-web-toolkit.googlecode.com/svn/trunk/distro-source/core/src/gwt-module.dtd">
 <module>
     <inherits name="com.vaadin.DefaultWidgetSet" />
-    <!-- 
     <source path="shared"/>
     <source path="client"/>
-    -->
 </module>

@@ -2,6 +2,7 @@ package com.github.wolfie.refresher.shared;
 
 import com.github.wolfie.refresher.Refresher;
 import com.github.wolfie.refresher.client.RefresherExtension;
+import com.vaadin.client.ServerConnector;
 import com.vaadin.client.communication.RpcProxy;
 import com.vaadin.client.communication.StateChangeEvent;
 import com.vaadin.client.extensions.AbstractExtensionConnector;
@@ -40,6 +41,11 @@ public class RefresherConnector extends AbstractExtensionConnector {
 	@Override
 	public RefresherState getState() {
 		return (RefresherState) super.getState();
+	}
+
+	@Override
+	protected void extend(ServerConnector target) {
+		// do nothing ???
 	}
 	
 }

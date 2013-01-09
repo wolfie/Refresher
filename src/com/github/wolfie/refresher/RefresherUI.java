@@ -48,11 +48,11 @@ public class RefresherUI extends UI {
 	
 	@Override
 	public void init(final VaadinRequest request) {
-		// present with a loading contents.
+		// present with a "loading contents" placeholder text.
 		content = new Label("please wait while the database is queried");
 		addComponent(content);
 		
-		// the Refresher polls automatically
+		// the Refresher polls by default
 		final Refresher refresher = new Refresher();
 		refresher.addListener(new DatabaseListener());
 		addExtension(refresher);

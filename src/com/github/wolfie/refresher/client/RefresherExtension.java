@@ -23,6 +23,15 @@ import com.google.gwt.user.client.Timer;
 
 public class RefresherExtension {
 	
+	private class Poller extends Timer {
+		@Override
+		public void run() {
+			for (final ClientRefreshListener listener : listeners) {
+				listener.refreshed();
+			}
+		}
+	}
+	
 	public interface ClientRefreshListener {
 		void refreshed();
 	}
@@ -30,8 +39,6 @@ public class RefresherExtension {
 	private static final int STOP_THRESHOLD = 0;
 	
 	private final Poller poller;
-	private boolean pollerSuspendedDueDetach;
-	
 	private int pollingInterval;
 	
 	private final List<ClientRefreshListener> listeners = new ArrayList<ClientRefreshListener>();
@@ -42,15 +49,6 @@ public class RefresherExtension {
 	
 	public void unregister() {
 		poller.cancel();
-	}
-	
-	class Poller extends Timer {
-		@Override
-		public void run() {
-			for (final ClientRefreshListener listener : listeners) {
-				listener.refreshed();
-			}
-		}
 	}
 	
 	public void setPollingInterval(final int pollingInterval) {

@@ -34,6 +34,7 @@ public class RefresherConnector extends AbstractExtensionConnector {
 	
 	@Override
 	public void onStateChanged(final StateChangeEvent stateChangeEvent) {
+		// order matters!
 		extension.setPollingInterval(getState().pollingInterval);
 		extension.setPollingEnabled(getState().enabled);
 	}

@@ -50,7 +50,7 @@ public class RefresherUI extends UI {
 	public void init(final VaadinRequest request) {
 		// present with a "loading contents" placeholder text.
 		content = new Label("please wait while the database is queried");
-		addComponent(content);
+		setContent(content);
 		
 		// the Refresher polls by default
 		final Refresher refresher = new Refresher();

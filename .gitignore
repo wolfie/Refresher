@@ -3,4 +3,6 @@
 bin
 .settings
 WebContent/VAADIN/widgetsets
+WebContent/VAADIN/gwt-unitCache
 
+GWT development mode for Refresher.launch

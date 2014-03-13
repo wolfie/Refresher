@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Vaadin-License-Title: Apache License 2.0
 Implementation-Vendor: Henrik Paul
 Implementation-Title: Refresher
-Implementation-Version: 1.2.1.7
+Implementation-Version: 1.2.2.7
 Vaadin-License-File: http://www.apache.org/licenses/LICENSE-2.0.html
 Vaadin-Package-Version: 1
 Vaadin-Widgetsets: com.github.wolfie.refresher.RefresherWidgetset

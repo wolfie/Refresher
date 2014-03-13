@@ -2,7 +2,6 @@ package com.github.wolfie.refresher;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 import com.github.wolfie.refresher.shared.RefresherServerRpc;
 import com.github.wolfie.refresher.shared.RefresherState;
@@ -25,7 +24,7 @@ public class Refresher extends AbstractExtension {
     private static final long serialVersionUID = -2818447361687554688L;
     private static final int DEFAULT_REFRESH_INTERVAL = 1000;
 
-    private final List<RefreshListener> refreshListeners = new ArrayList<RefreshListener>();
+    private final ArrayList<RefreshListener> refreshListeners = new ArrayList<RefreshListener>();
 
     private final RefresherServerRpc rpc = new RefresherServerRpc() {
         private static final long serialVersionUID = -5572645605753743517L;
@@ -68,7 +67,10 @@ public class Refresher extends AbstractExtension {
     }
 
     private void fireRefreshEvents() {
-        for (final RefreshListener listener : refreshListeners) {
+        @SuppressWarnings("unchecked")
+        final ArrayList<RefreshListener> clone = (ArrayList<RefreshListener>) refreshListeners
+                .clone();
+        for (final RefreshListener listener : clone) {
             listener.refresh(this);
         }
     }

@@ -22,53 +22,53 @@ import java.util.List;
 import com.google.gwt.user.client.Timer;
 
 public class RefresherExtension {
-	
-	private class Poller extends Timer {
-		@Override
-		public void run() {
-			for (final ClientRefreshListener listener : listeners) {
-				listener.refreshed();
-			}
-		}
-	}
-	
-	public interface ClientRefreshListener {
-		void refreshed();
-	}
-	
-	private static final int STOP_THRESHOLD = 0;
-	
-	private final Poller poller;
-	private int pollingInterval;
-	
-	private final List<ClientRefreshListener> listeners = new ArrayList<ClientRefreshListener>();
-	
-	public RefresherExtension() {
-		poller = new Poller();
-	}
-	
-	public void unregister() {
-		poller.cancel();
-	}
-	
-	public void setPollingInterval(final int pollingInterval) {
-		this.pollingInterval = pollingInterval;
-		poller.cancel();
-		
-		if (pollingInterval > STOP_THRESHOLD) {
-			poller.scheduleRepeating(this.pollingInterval);
-		}
-	}
-	
-	public void addListener(final ClientRefreshListener clientRefreshListener) {
-		listeners.add(clientRefreshListener);
-	}
-	
-	public void setPollingEnabled(final boolean enabled) {
-		if (enabled) {
-			setPollingInterval(pollingInterval);
-		} else {
-			poller.cancel();
-		}
-	}
+
+    private class Poller extends Timer {
+        @Override
+        public void run() {
+            for (final ClientRefreshListener listener : listeners) {
+                listener.refreshed();
+            }
+        }
+    }
+
+    public interface ClientRefreshListener {
+        void refreshed();
+    }
+
+    private static final int STOP_THRESHOLD = 0;
+
+    private final Poller poller;
+    private int pollingInterval;
+
+    private final List<ClientRefreshListener> listeners = new ArrayList<ClientRefreshListener>();
+
+    public RefresherExtension() {
+        poller = new Poller();
+    }
+
+    public void unregister() {
+        poller.cancel();
+    }
+
+    public void setPollingInterval(final int pollingInterval) {
+        this.pollingInterval = pollingInterval;
+        poller.cancel();
+
+        if (pollingInterval > STOP_THRESHOLD) {
+            poller.scheduleRepeating(this.pollingInterval);
+        }
+    }
+
+    public void addListener(final ClientRefreshListener clientRefreshListener) {
+        listeners.add(clientRefreshListener);
+    }
+
+    public void setPollingEnabled(final boolean enabled) {
+        if (enabled) {
+            setPollingInterval(pollingInterval);
+        } else {
+            poller.cancel();
+        }
+    }
 }

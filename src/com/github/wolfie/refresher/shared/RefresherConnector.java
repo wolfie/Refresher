@@ -10,43 +10,43 @@ import com.vaadin.shared.ui.Connect;
 
 @Connect(Refresher.class)
 public class RefresherConnector extends AbstractExtensionConnector {
-	private static final long serialVersionUID = 7295403302950163716L;
-	private RefresherServerRpc rpc;
-	private final RefresherExtension extension = new RefresherExtension();
-	
-	@Override
-	protected void init() {
-		super.init();
-		rpc = RpcProxy.create(RefresherServerRpc.class, this);
-		
-		extension.addListener(new RefresherExtension.ClientRefreshListener() {
-			@Override
-			public void refreshed() {
-				rpc.refresh();
-			}
-		});
-	}
-	
-	@Override
-	public void onUnregister() {
-		extension.unregister();
-	}
-	
-	@Override
-	public void onStateChanged(final StateChangeEvent stateChangeEvent) {
-		// order matters!
-		extension.setPollingInterval(getState().pollingInterval);
-		extension.setPollingEnabled(getState().enabled);
-	}
-	
-	@Override
-	public RefresherState getState() {
-		return (RefresherState) super.getState();
-	}
-	
-	@Override
-	protected void extend(final ServerConnector target) {
-		// no components to extend
-	}
-	
+    private static final long serialVersionUID = 7295403302950163716L;
+    private RefresherServerRpc rpc;
+    private final RefresherExtension extension = new RefresherExtension();
+
+    @Override
+    protected void init() {
+        super.init();
+        rpc = RpcProxy.create(RefresherServerRpc.class, this);
+
+        extension.addListener(new RefresherExtension.ClientRefreshListener() {
+            @Override
+            public void refreshed() {
+                rpc.refresh();
+            }
+        });
+    }
+
+    @Override
+    public void onUnregister() {
+        extension.unregister();
+    }
+
+    @Override
+    public void onStateChanged(final StateChangeEvent stateChangeEvent) {
+        // order matters!
+        extension.setPollingInterval(getState().pollingInterval);
+        extension.setPollingEnabled(getState().enabled);
+    }
+
+    @Override
+    public RefresherState getState() {
+        return (RefresherState) super.getState();
+    }
+
+    @Override
+    protected void extend(final ServerConnector target) {
+        // no components to extend
+    }
+
 }
